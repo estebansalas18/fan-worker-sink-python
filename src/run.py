@@ -15,7 +15,7 @@ def main(numbers_count=100, worker_count=3):
 
     return final_results
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     # Leer argumentos desde consola (opcionales)
     # Ejemplo:
     #   python run.py 200 5
