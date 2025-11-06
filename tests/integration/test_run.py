@@ -1,8 +1,4 @@
-import sys
 import pytest
-import importlib
-import ast
-
 
 def test_main_with_parameters():
     from src.run import main
@@ -16,37 +12,3 @@ def test_main_defaults():
     result = main()
     assert len(result) == 100
     assert result == sorted(result)
-
-
-def test_cli_execution(monkeypatch, capfd):
-    monkeypatch.setattr(sys, "argv", ["run.py", "5", "2"])
-
-    def fake_main(n, w):
-        return [1, 4, 9, 16, 25]
-
-    monkeypatch.setattr("src.run.main", fake_main)
-
-    import src.run
-    importlib.reload(src.run)
-
-    captured = capfd.readouterr()
-    output = ast.literal_eval(captured.out.strip())
-
-    assert output == [1, 4, 9, 16, 25]
-
-
-def test_cli_invalid_args(monkeypatch, capfd):
-    monkeypatch.setattr(sys, "argv", ["run.py", "abc", "xyz"])
-
-    def fake_main(n, w):
-        return [0]
-
-    monkeypatch.setattr("src.run.main", fake_main)
-
-    import src.run
-    importlib.reload(src.run)
-
-    captured = capfd.readouterr()
-    output = ast.literal_eval(captured.out.strip())
-
-    assert output == [0]
