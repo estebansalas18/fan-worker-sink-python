@@ -56,7 +56,7 @@ python src/run.py
 
 Esto generará un arreglo de 100 números aleatorios, los procesará en paralelo y devolverá los resultados **ordenados ascendentemente**.
 
-## Tests y cobertura
+## ✅ Tests y cobertura
 
 ### Ejecutar todas las pruebas
 
@@ -76,7 +76,7 @@ pytest tests/integration
 - Reporte HTML disponible en `html/index.html`
 - Coverage mínima garantizada: 80% en módulos principales.
 
-## Buenas prácticas implementadas
+## 📋 Buenas prácticas implementadas
 - Código modular con **arquitectura limpia**.
 - Pruebas unitarias e integración completas.
 - Cobertura mínima del 80%
@@ -85,4 +85,4 @@ pytest tests/integration
 
 ---
 
-**Juan Esteban Salas Flórez** - Cloud Engineer
+**📌 Juan Esteban Salas Flórez - Cloud Engineer**
