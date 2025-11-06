@@ -23,6 +23,7 @@ fan-worker-sink-python/
 │ ├─ fan.py             # Generación y distribución de números
 │ ├─ worker.py          # Procesamiento en paralelo
 │ ├─ sink.py            # Recolección y ordenamiento de resultados
+│ ├─ run_logs.py        # Script principal para ejecutar el pipeline (con Logs)
 │ └─ run.py             # Script principal para ejecutar el pipeline
 │
 ├─ tests/
@@ -30,7 +31,13 @@ fan-worker-sink-python/
 │ ├─ unit/              # Pruebas unitarias por módulo
 │ └─ integration/       # Pruebas del flujo completo
 │
+├─ .github/
+│ └─ workflows/
+│  └─ cicd.yaml         # Pipeline con pruebas automatizadas en GitHub Actions
+│
 ├─ requirements.txt
+├─ Dockerfile
+├─ processing_log.csv   # Resultado de ejecución con logs
 ├─ pytest.ini
 ├─ .gitignore
 └─ README.md
@@ -48,13 +55,43 @@ source .venv/bin/activate       # Linux
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Ejecutar proyecto
+### 2️⃣ Ejecuciones disponibles
 
+#### A. Modo estándar (sin logs)
+
+Ejecuta el sistema con **100 números** y **3 workers** por defecto:
 ```
 python -m src.run
 ```
 
-Esto generará un arreglo de 100 números aleatorios, los procesará en paralelo y devolverá los resultados **ordenados ascendentemente**.
+Si deseas cambiar los valores, puedes pasarlos por consola:
+```
+python -m src.run 1000 4
+```
+→ Esto ejecutará el procesamiento con **1000 números** y **4 workers**.
+
+#### B. Modo demostración (con logs + CSV)
+
+Este modo sirve para mostrar visualmente cómo los workers están procesando en paralelo.
+```
+python -m src.run
+```
+Este modo:
+- Usa **1000 números** y **3 workers** por defecto.
+- Muestra en consola qué worker procesa cada número.
+- Genera el archivo `processing_log.csv` en la carpeta raíz del proyecto.
+
+El CSV incluye los datos de cada worker y el número procesado:
+
+| worker_id | número_original   | número_procesado  |
+|---------- |----------------   |-----------------  |
+| worker_1  | 42                | 1764              |
+| worker_2  | 17                | 289               |
+| worker_3  | 95                | 9025              |
+
+#### ✅ Resultado Final
+
+Ambas formas devuelven al final la lista con los valores resultantes **ordenados ascendentemente**.
 
 ## ✅ Tests y cobertura
 
