@@ -1,4 +1,4 @@
-name: Python - Tests - CI
+name: CI/CD - Python + Docker
 
 on: 
   push:
@@ -9,7 +9,8 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  test:
+    name: Run Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -33,9 +34,32 @@ jobs:
       - name: Run tests with coverage
         run: |
           pytest
-      
-      - name: upload coverage report 
+
+      - name: Upload coverage report 
         uses: actions/upload-artifact@v4
         with: 
           name: coverage-html
           path: htmlcov/
+
+  docker:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t fan-worker-sink .
+
+      # Opcional:
+      # - name: Login to DockerHub
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      # - name: Push Docker image
+      #   run: |
+      #     docker tag fan-worker-sink <usuario>/fan-worker-sink:latest
+      #     docker push <usuario>/fan-worker-sink:latest
