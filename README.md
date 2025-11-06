@@ -6,15 +6,13 @@
 
 ## 📌 Descripción
 
-Este proyecto implementa un **sistema distribuido local** usando el patrón **Fan-Worker-Sink** en Python.  
+Este proyecto implementa un **sistema distribuido local** usando el patrón **Fan-Worker-Sink** en Python.
 
 - **Fan**: genera y distribuye un lote de números aleatorios a los workers.  
 - **Worker**: procesa los números en paralelo (eleva cada número al cuadrado).  
 - **Sink**: recolecta todos los resultados y los devuelve **ordenados ascendentemente**.  
 
 El objetivo del proyecto es **demostrar buenas prácticas de desarrollo, testing y arquitectura limpia**, listo para entornos profesionales y escalables.
-
----
 
 ## ⚒️ Estructura del Proyecto
 
@@ -38,8 +36,6 @@ fan-worker-sink-python/
 └─ README.md
 ```
 
----
-
 ## 🚀 Cómo ejecutar el proyecto
 
 ### 1️⃣ Instalar depedendencias
@@ -58,10 +54,35 @@ pip install -r requirements.txt
 python src/run.py
 ```
 
-Esto generará un arreglo de 100 números aleatorios, los procesará en paralelo y devolverá los resultados ordenados ascendentemente.
-
----
+Esto generará un arreglo de 100 números aleatorios, los procesará en paralelo y devolverá los resultados **ordenados ascendentemente**.
 
 ## Tests y cobertura
 
 ### Ejecutar todas las pruebas
+
+```
+pytest
+```
+
+### Ejecutar solo pruebas unitarias o de integración
+
+```
+pytest tests/unit
+pytest tests/integration
+```
+
+### Reporte de cobertura
+- Coverage se genera automáticamente al correr `pytest`.
+- Reporte HTML disponible en `html/index.html`
+- Coverage mínima garantizada: 80% en módulos principales.
+
+## Buenas prácticas implementadas
+- Código modular con **arquitectura limpia**.
+- Pruebas unitarias e integración completas.
+- Cobertura mínima del 80%
+- Compatible con **GitHub Actions** para CI/CD.
+- Preparado para Docker y despliegue.
+
+---
+
+**Juan Esteban Salas Flórez** - Cloud Engineer
