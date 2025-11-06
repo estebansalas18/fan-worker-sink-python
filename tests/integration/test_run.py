@@ -1,6 +1,7 @@
 import sys
 import pytest
 import importlib
+import ast
 
 
 def test_main_with_parameters():
@@ -20,17 +21,16 @@ def test_main_defaults():
 def test_cli_execution(monkeypatch, capfd):
     monkeypatch.setattr(sys, "argv", ["run.py", "5", "2"])
 
-    # Mock main para evitar crear procesos reales
     def fake_main(n, w):
         return [1, 4, 9, 16, 25]
-    
+
     monkeypatch.setattr("src.run.main", fake_main)
 
     import src.run
     importlib.reload(src.run)
 
     captured = capfd.readouterr()
-    output = eval(captured.out.strip())  # convierte el texto impreso en lista
+    output = ast.literal_eval(captured.out.strip())
 
     assert output == [1, 4, 9, 16, 25]
 
@@ -47,6 +47,6 @@ def test_cli_invalid_args(monkeypatch, capfd):
     importlib.reload(src.run)
 
     captured = capfd.readouterr()
-    output = eval(captured.out.strip())
+    output = ast.literal_eval(captured.out.strip())
 
     assert output == [0]
