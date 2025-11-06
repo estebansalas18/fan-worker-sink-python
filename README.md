@@ -51,7 +51,7 @@ pip install -r requirements.txt
 ### 2️⃣ Ejecutar proyecto
 
 ```
-python src/run.py
+python -m src.run
 ```
 
 Esto generará un arreglo de 100 números aleatorios, los procesará en paralelo y devolverá los resultados **ordenados ascendentemente**.
