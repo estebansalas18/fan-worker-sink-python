@@ -74,7 +74,7 @@ python -m src.run 1000 4
 
 Este modo sirve para mostrar visualmente cómo los workers están procesando en paralelo.
 ```
-python -m src.run
+python -m src.run_logs
 ```
 Este modo:
 - Usa **1000 números** y **3 workers** por defecto.
